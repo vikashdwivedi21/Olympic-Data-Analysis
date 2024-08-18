@@ -1,73 +1,13 @@
-# import streamlit as st
-# import pandas as pd 
-# import preprocessor
-# import helper
-
-# df = pd.read_csv('Dataset\\athlete_events.csv')
-# region_df = pd.read_csv('Dataset\\noc_regions.csv')
-
- 
-# df = preprocessor.preprocess(df, region_df)
-
-
-# st.sidebar.title('Olympics Analysis')
-# st.sidebar.image("E:\Downloads\maxresdefault.jpg")
-
-
-# user_menu = st.sidebar.radio(
-#     'Select an Option',
-#     ('Medal Tally','Overall Analysis','Country-wise Analysis', 'Athelete-wise Analysis')
-
-# )
-
-# st.dataframe(df)
-
-# if user_menu == "Medal Tally":
-#     st.sidebar.header('Medal Tally')
-
-#     years,country = helper.country_year_list(df)
-#     selected_year = st.sidebar.selectbox("Select Year", years)
-#     selected_country = st.sidebar.selectbox("Select Country", country)
-    
-#     # medal_tally = helper.medal_tally
-#     # medal_tally = helper.medal_tally(df)
-#     # st.dataframe(medal_tally)
-
-
-
-
-#     if user_menu == 'Medal Tally':
-#         st.sidebar.header("Medal Tally")
-#         years,country = helper.country_year_list(df)
-
-#         selected_year = st.sidebar.selectbox("Select Year",years)
-#         selected_country = st.sidebar.selectbox("Select Country", country)
-
-#         medal_tally = helper.fetch_medal_tally(df,selected_year,selected_country)
-#         if selected_year == 'Overall' and selected_country == 'Overall':
-#             st.title("Overall Tally")
-#         if selected_year != 'Overall' and selected_country == 'Overall':
-#             st.title("Medal Tally in " + str(selected_year) + " Olympics")
-#         if selected_year == 'Overall' and selected_country != 'Overall':
-#             st.title(selected_country + " overall performance")
-#         if selected_year != 'Overall' and selected_country != 'Overall':
-#             st.title(selected_country + " performance in " + str(selected_year) + " Olympics")
-#         st.table(medal_tally)
-
-
-
-
-
 import streamlit as st
 import pandas as pd
-import src.preprocessor as preprocessor,src.helper as helper
+import preprocessor,helper
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
 
-df = pd.read_csv('athlete_events.csv')
-region_df = pd.read_csv('noc_regions.csv')
+df = pd.read_csv('Dataset/athlete_events.csv')
+region_df = pd.read_csv('Dataset/noc_regions.csv')
 
 df = preprocessor.preprocess(df,region_df)
 
@@ -232,5 +172,6 @@ if user_menu == 'Athlete wise Analysis':
     fig = px.line(final, x="Year", y=["Male", "Female"])
     fig.update_layout(autosize=False, width=1000, height=600)
     st.plotly_chart(fig)
+
 
 
